@@ -3,15 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    public class BendHistBusqRemanentesDetalle
+    public class BendHistBusqOtrosDetalle
     {
         [Key]
-        public int IdBendHistBusqRemanente { get; set; }
+        public int IdBendHistBusqOtro { get; set; }
         public int BendHistBusqCabeceraId { get; set; }
         public BendHistBusqCabecera BendHistBusqCabecera { get; set; }
-        public bool? TieneRemanente { get; set; }
-        public int? EstadoRemanente { get; set; }
-        public string? ObservacionRemanente { get; set; }
+        public bool? TieneOtros { get; set; }
+        public int? EstadoOtros { get; set; }
+        public string? ObservacionOtros { get; set; }
         public int? UsuarioId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? FecCreacion { get; set; }

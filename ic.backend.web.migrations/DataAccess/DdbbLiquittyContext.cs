@@ -241,6 +241,10 @@ namespace DataAccess
 
         public virtual DbSet<InvbTipoInmueble> InvbTipoInmuebles { get; set; }
         public virtual DbSet<BendHistBusqCabecera> BendHistBusqCabeceras { get; set; }
+        public virtual DbSet<BendHistBusqCuentasBancariasDetalle> BendHistBusqCuentasBancariasDetalles { get; set; }
+        public virtual DbSet<BendHistBusqEstablecimientoComerciosDetalle> BendHistBusqEstablecimientoComerciosDetalles { get; set; }
+        public virtual DbSet<BendHistBusqOtrosDetalle> BendHistBusqOtrosDetalles { get; set; }
+        public virtual DbSet<BendHistBusqRemanentesDetalle> BendHistBusqRemanentesDetalles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -3826,6 +3830,46 @@ namespace DataAccess
 
             modelBuilder.Entity<BendHistBusqCabecera>()
                 .ToTable("Bend_Hist_Busq_Cabeceras");
+            OnModelCreatingPartial(modelBuilder);
+
+            modelBuilder.Entity<BendHistBusqOtrosDetalle>()
+            .HasOne(b => b.BendHistBusqCabecera)
+            .WithMany()
+            .HasForeignKey(b => b.BendHistBusqCabeceraId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BendHistBusqOtrosDetalle>()
+                .ToTable("BEND_HIST_BUSQ_OTROS_DETALLES");
+            OnModelCreatingPartial(modelBuilder);
+
+            modelBuilder.Entity<BendHistBusqEstablecimientoComerciosDetalle>()
+            .HasOne(b => b.BendHistBusqCabecera)
+            .WithMany()
+            .HasForeignKey(b => b.BendHistBusqCabeceraId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BendHistBusqEstablecimientoComerciosDetalle>()
+                .ToTable("BEND_HIST_BUSQ_ESTABLECIMIENTOS_COMERCIOS_DETALLES");
+            OnModelCreatingPartial(modelBuilder);
+
+            modelBuilder.Entity<BendHistBusqCuentasBancariasDetalle>()
+            .HasOne(b => b.BendHistBusqCabecera)
+            .WithMany()
+            .HasForeignKey(b => b.BendHistBusqCabeceraId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BendHistBusqCuentasBancariasDetalle>()
+                .ToTable("BEND_HIST_BUSQ_CUENTAS_BANCARIAS_DETALLES");
+            OnModelCreatingPartial(modelBuilder);
+
+            modelBuilder.Entity<BendHistBusqRemanentesDetalle>()
+            .HasOne(b => b.BendHistBusqCabecera)
+            .WithMany()
+            .HasForeignKey(b => b.BendHistBusqCabeceraId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BendHistBusqRemanentesDetalle>()
+                .ToTable("BEND_HIST_BUSQ_CUENTAS_REMANENTES_DETALLES");
             OnModelCreatingPartial(modelBuilder);
         }
 
